@@ -2,37 +2,57 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HATchat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HATchat 🎩 — iOS 26</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="login-container" class="card">
-        <h2>Вход в HATchat</h2>
-        <input type="text" id="username-input" placeholder="Ваше имя..." required>
-        <input type="text" id="room-input" placeholder="Название комнаты..." required>
-        <button id="join-btn">Войти</button>
+<body class="ios-dark-amber">
+
+    <div class="ios-blur-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
-    <div id="chat-container" class="card hidden">
-        <div class="chat-header">
-            <h3 id="room-title">Комната: -</h3>
-            <button id="leave-btn">Выйти</button>
+    <div class="ios-control-center">
+        <button id="theme-toggle-btn" class="ios-pill-btn">🎨 Сменить интерфейс</button>
+    </div>
+
+    <div id="login-container" class="ios-card dynamic-island">
+        <div class="ios-app-icon">🎩</div>
+        <div class="login-logo">HATchat</div>
+        <p class="ios-subtitle">Защищенное подключение iOS Link</p>
+        
+        <div class="ios-input-group">
+            <input type="text" id="username-input" placeholder="Идентификатор пользователя" required>
+            <input type="text" id="room-input" placeholder="Имя комнаты или ID" required>
+        </div>
+        
+        <button id="join-btn" class="ios-btn-primary">Подключиться</button>
+    </div>
+
+    <div id="chat-container" class="ios-card ios-chat-layout hidden">
+        <div class="chat-header ios-navbar">
+            <div class="room-info">
+                <span class="ios-live-indicator">● LIVE</span>
+                <h3 id="room-title">-</h3>
+            </div>
+            <button id="leave-btn">Отключить</button>
         </div>
         
         <div class="chat-main">
-            <div class="sidebar">
-                <h4>Онлайн (<span id="user-count">0</span>)</h4>
+            <div class="sidebar ios-sidebar">
+                <h4>Активны (<span id="user-count">0</span>)</h4>
                 <ul id="users-list"></ul>
             </div>
 
             <div class="chat-area">
-                <div id="messages-box"></div>
-                <div id="typing-indicator"></div>
+                <div id="messages-box" class="ios-messages-container"></div>
+                <div id="typing-indicator" class="ios-typing"></div>
                 
-                <form id="message-form">
-                    <input type="text" id="message-input" placeholder="Сообщение..." autocomplete="off" required>
-                    <button type="submit">Отправить</button>
+                <form id="message-form" class="ios-input-bar">
+                    <input type="text" id="message-input" placeholder="Сообщение iMessage" autocomplete="off" required>
+                    <button type="submit" id="send-btn">↑</button>
                 </form>
             </div>
         </div>
@@ -40,5 +60,21 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
+
+    <script>
+        const themes = ['ios-dark-amber', 'ios-light-amber', 'ios-monochrome'];
+        let currentThemeIndex = 0;
+        const btn = document.getElementById('theme-toggle-btn');
+        
+        btn.addEventListener('click', () => {
+            document.body.classList.remove(themes[currentThemeIndex]);
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            document.body.classList.add(themes[currentThemeIndex]);
+            
+            if(currentThemeIndex === 0) btn.innerText = "🎨 Space Amber (Тёмная)";
+            if(currentThemeIndex === 1) btn.innerText = "🎨 Light Amber (Светлая)";
+            if(currentThemeIndex === 2) btn.innerText = "🎨 Luxury Mono (Контраст)";
+        });
+    </script>
 </body>
 </html>
