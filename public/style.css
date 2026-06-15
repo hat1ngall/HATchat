@@ -1,5 +1,5 @@
 /* ======================================================= */
-/* ЦВЕТОВЫЕ МАТРИЦЫ И ПРЕСЕТЫ ИНТЕРФЕЙСА iOS 26             */
+/* 1. ЦВЕТОВЫЕ МАТРИЦЫ И ПРЕСЕТЫ ИНТЕРФЕЙСА iOS             */
 /* ======================================================= */
 
 .ios-dark-amber {
@@ -60,7 +60,7 @@
 }
 
 /* ======================================================= */
-/* БАЗОВЫЕ СИСТЕМНЫЕ СТИЛИ                                 */
+/* 2. БАЗОВЫЕ СИСТЕМНЫЕ СТИЛИ                               */
 /* ======================================================= */
 
 * {
@@ -83,6 +83,7 @@ body {
     position: relative;
 }
 
+/* Анимированный задний фон с блюром */
 .ios-blur-bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -103,6 +104,7 @@ body {
 .orb-2 { width: 600px; height: 600px; background: var(--orb-color-1); bottom: -20%; right: -10%; animation-delay: -5s; }
 .orb-3 { width: 400px; height: 400px; background: #3a3a3c; top: 40%; left: 50%; animation-delay: -10s; }
 
+/* Переключатель тем */
 .ios-control-center {
     position: fixed;
     top: 25px;
@@ -124,6 +126,7 @@ body {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Главный контейнер-карта приложения */
 .ios-card {
     position: relative;
     z-index: 10;
@@ -140,6 +143,7 @@ body {
 
 .hidden { display: none !important; }
 
+/* Форма авторизации */
 #login-container {
     max-width: 390px;
     text-align: center;
@@ -185,7 +189,7 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 
 /* ======================================================= */
-/* ОКНО ЧАТА И СЕТКА                                       */
+/* 3. СЕТКА И ОКНО ЧАТА                                    */
 /* ======================================================= */
 
 .ios-navbar {
@@ -212,6 +216,7 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     height: 60vh;
 }
 
+/* Боковая панель пользователей */
 .ios-sidebar {
     flex: 1;
     max-width: 210px;
@@ -242,7 +247,7 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     flex-direction: column;
 }
 
-/* Окно, где скроллятся сообщения */
+/* Скролл-контейнер для списка сообщений */
 .ios-messages-container {
     flex: 1;
     overflow-y: auto;
@@ -253,12 +258,12 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 
 /* ======================================================= */
-/* ИЗОЛИРОВАННЫЙ И НАДЁЖНЫЙ ФИКС ОБЛАЧКОВ ЧАТА             */
+/* 4. ЧИСТЫЙ И ИЗОЛИРОВАННЫЙ ФИКС ОБЛАЧКОВ iMESSAGE        */
 /* ======================================================= */
 
-/* Стилизуем блоки СТРОГО внутри контейнера сообщений */
+/* Контейнеры верхнего уровня для строк сообщений */
 .ios-messages-container > div {
-    margin-bottom: 16px !important;
+    margin-bottom: 14px !important;
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
@@ -268,66 +273,89 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     padding: 0 !important;
 }
 
-/* По умолчанию (и для чужих) прижимаем блоки влево */
+/* По умолчанию (для чужих) выравниваем элементы влево */
 .ios-messages-container > div {
     align-items: flex-start !important;
 }
 
-/* Если у блока есть класс my-message или правое выравнивание — прижимаем вправо */
+/* Твои сообщения прижимаем вправо */
 .ios-messages-container > div.my-message,
 .ios-messages-container > div[style*="text-align: right"],
 .ios-messages-container > div[style*="flex-end"] {
     align-items: flex-end !important;
 }
 
-/* Мета-данные (Имя/время над текстом) */
+/* МЕТА-ДАННЫЕ: Имя и время (ПОЛНЫЙ СБРОС ОВАЛОВ И ОБВОДОК) */
 .ios-messages-container > div > small,
-.ios-messages-container > div > span:first-child {
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    color: var(--ios-text-secondary) !important;
-    margin-bottom: 4px !important;
-    padding: 0 4px !important;
+.ios-messages-container > div > span:first-child,
+.ios-messages-container > div > .message-user {
+    display: block !important;
+    width: auto !important;
+    max-width: 100% !important;
     background: transparent !important;
     border: none !important;
+    color: var(--ios-text-secondary) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 0 8px !important;
+    margin-bottom: 4px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
 }
 
-/* СТИЛИЗАЦИЯ САМОГО ТЕКСТА (Убираем синие/белые квадраты) */
+/* ОБЛАЧКО ТЕКСТА (Овалы применяются ИСКЛЮЧИТЕЛЬНО сюда) */
 .ios-messages-container > div > p,
-.ios-messages-container > div > div,
+.ios-messages-container > div > .message-text,
 .ios-messages-container > div > span:last-child {
     display: inline-block !important;
-    width: fit-content !important; /* Обнимает текст, а не ломает по одной букве */
+    width: fit-content !important; 
     max-width: 75% !important;
     padding: 10px 18px !important;
     font-size: 15px !important;
     line-height: 1.4 !important;
-    border-radius: 20px !important;
     word-break: break-word !important;
     box-sizing: border-box !important;
     
-    /* Цвета для чужих сообщений по умолчанию */
+    /* Дефолтный стиль для чужих сообщений */
     background: var(--msg-other-bg) !important;
     color: var(--msg-other-text) !important;
     border: var(--msg-other-border) !important;
+    border-radius: 18px !important;
     box-shadow: none !important;
 }
 
-/* Цвета для ТВОИХ сообщений (когда блок справа) */
+/* Цвета только для ТВОИХ облачков текста */
 .ios-messages-container > div.my-message > p,
-.ios-messages-container > div.my-message > div,
+.ios-messages-container > div.my-message > .message-text,
 .ios-messages-container > div.my-message > span:last-child,
 .ios-messages-container > div[style*="text-align: right"] > p,
-.ios-messages-container > div[style*="text-align: right"] > div,
+.ios-messages-container > div[style*="text-align: right"] > .message-text,
 .ios-messages-container > div[style*="text-align: right"] > span:last-child {
     background: var(--msg-my-bg) !important;
     color: var(--msg-my-text) !important;
     border: none !important;
     box-shadow: 0 4px 15px var(--ios-accent-glow) !important;
+    border-radius: 18px !important;
+}
+
+/* Стили для системных (сервисных) сообщений типа "User вошел в чат" */
+.ios-messages-container > div.system-message,
+.ios-messages-container > div[style*="center"] {
+    align-items: center !important;
+}
+.ios-messages-container > div.system-message *,
+.ios-messages-container > div[style*="center"] * {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--ios-text-secondary) !important;
+    font-style: italic !important;
+    font-size: 13px !important;
+    padding: 4px !important;
 }
 
 /* ======================================================= */
-/* ПОЛЕ ВВОДА                                              */
+/* 5. ПОЛЕ ВВОДА И АНИМАЦИИ                                */
 /* ======================================================= */
 
 .ios-input-bar {
@@ -340,6 +368,7 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 .ios-input-bar input { padding: 10px 15px; margin-bottom: 0; }
 
+/* Круглая кнопка отправки стрелочкой вверх */
 #send-btn {
     background: var(--ios-accent);
     color: white;
@@ -358,6 +387,7 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     100% { transform: translate(-5%, -10%) scale(0.9); }
 }
 
+/* Адаптив под мобилки */
 @media (max-width: 680px) {
     body { padding: 8px; }
     .ios-card { padding: 20px; border-radius: 28px; }
