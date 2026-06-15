@@ -252,110 +252,73 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 
 /* ======================================================= */
-/* 4. СТАБИЛЬНЫЙ ФИКС ОБЛАЧКОВ iMESSAGE                     */
+/* 4. ГАРАНТИРОВАННЫЙ ФИКС ОБЛАЧКОВ iMESSAGE               */
 /* ======================================================= */
 
-/* Контейнер строки (сбрасываем все фоны, рамки и скругления) */
-.ios-messages-container > div {
-    margin-bottom: 16px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-}
-
-/* По умолчанию (чужие) — выравнивание влево */
-.ios-messages-container > div {
-    align-items: flex-start !important;
-}
-
-/* Свои сообщения — выравнивание вправо */
-.ios-messages-container > div[style*="text-align: right"],
-.ios-messages-container > div[style*="flex-end"],
-.ios-messages-container > div.my-message {
-    align-items: flex-end !important;
-}
-
-/* Полный сброс кругов и рамок со ВСЕХ элементов внутри строки сообщения */
-.ios-messages-container > div * {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    width: auto !important;
-    max-width: 100% !important;
-}
-
-/* Текст автора и время (сверху сообщения) */
-.ios-messages-container > div > .message-user,
-.ios-messages-container > div > small,
-.ios-messages-container > div > span:not(:last-child) {
-    display: block !important;
-    color: var(--ios-text-secondary) !important;
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    margin-bottom: 4px !important;
-    padding: 0 4px !important;
-}
-
-/* ОБЛАЧКО ТЕКСТА (Включаем овалы ТОЛЬКО на элементы текста сообщения) */
-.ios-messages-container > div > p,
-.ios-messages-container > div > .message-text,
-.ios-messages-container > div > span:last-child {
-    display: inline-block !important;
-    width: fit-content !important;
-    max-width: 75% !important;
+/* Применяем овальные iMessage-облачка прямо на блоки, которые генерит твой JS */
+.ios-messages-container > div,
+.ios-messages-container > p {
+    margin-bottom: 12px !important;
     padding: 10px 18px !important;
+    border-radius: 20px !important;
     font-size: 15px !important;
     line-height: 1.4 !important;
-    border-radius: 20px !important;
+    max-width: 75% !important;
+    width: fit-content !important;
     word-break: break-word !important;
     box-sizing: border-box !important;
+    display: block !important;
     
-    /* Дефолтный стиль для ЧУЖИХ облачков текста */
+    /* Дефолтный стиль: сообщения ЧУЖИХ пользователей */
     background: var(--msg-other-bg) !important;
     color: var(--msg-other-text) !important;
     border: var(--msg-other-border) !important;
+    align-self: flex-start !important;
 }
 
-/* Стилизация ТВОИХ облачков текста (когда строка выровнена вправо) */
-.ios-messages-container > div[style*="text-align: right"] > p,
-.ios-messages-container > div[style*="text-align: right"] > .message-text,
-.ios-messages-container > div[style*="text-align: right"] > span:last-child,
-.ios-messages-container > div[style*="flex-end"] > p,
-.ios-messages-container > div[style*="flex-end"] > .message-text,
-.ios-messages-container > div[style*="flex-end"] > span:last-child,
-.ios-messages-container > div.my-message > p,
-.ios-messages-container > div.my-message > .message-text,
-.ios-messages-container > div.my-message > span:last-child {
+/* СВОИ сообщения: убираем левую рамку, красим в оранжевый/черный и жмем вправо */
+.ios-messages-container > div[style*="text-align: right"],
+.ios-messages-container > div[style*="flex-end"],
+.ios-messages-container > p[style*="text-align: right"],
+.ios-messages-container > p[style*="flex-end"],
+.ios-messages-container > .my-message {
+    align-self: flex-end !important;
     background: var(--msg-my-bg) !important;
     color: var(--msg-my-text) !important;
     border: none !important;
     box-shadow: 0 4px 15px var(--ios-accent-glow) !important;
 }
 
-/* Системные логи ("пользователь вошел/вышел") */
-.ios-messages-container > div[style*="text-align: center"],
-.ios-messages-container > div.system-message {
-    align-items: center !important;
+/* СБРАСЫВАЕМ вложенные рамки и круги (если JS засунул p внутрь div или наоборот) */
+.ios-messages-container > div * {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline !important;
+    color: inherit !important;
 }
-.ios-messages-container > div[style*="text-align: center"] *,
-.ios-messages-container > div.system-message * {
+
+/* СИСТЕМНЫЕ УВЕДОМЛЕНИЯ ("пользователь вошел/вышел") */
+.ios-messages-container > div[style*="text-align: center"],
+.ios-messages-container > p[style*="text-align: center"],
+.ios-messages-container > .system-message {
+    align-self: center !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     color: var(--ios-text-secondary) !important;
     font-style: italic !important;
     font-size: 13px !important;
+    padding: 4px 10px !important;
+    text-align: center !important;
+    max-width: 100% !important;
 }
 
 /* ======================================================= */
-/* 5. ПОЛЕ ВВОДА                                           */
+/* 5. ПОЛЕ ВВОДА И АНИМАЦИИ                                */
 /* ======================================================= */
 
 .ios-input-bar {
