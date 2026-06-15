@@ -252,40 +252,50 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 
 /* ======================================================= */
-/* 4. СТАБИЛЬНЫЙ ФИКС ОБЛАЧКОВ iMESSAGE                     */
+/* 4. ЖЕСТКИЙ ФИКС ОБЛАЧКОВ БЕЗ КЛАССОВ (СТРОГО ПО DOM)     */
 /* ======================================================= */
 
-/* Базовый контейнер сообщения */
-.message {
-    margin-bottom: 14px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start; /* Чужие по левому краю */
+/* Каждый отдельный блок сообщения (обнуляем стили контейнера) */
+.ios-messages-container > div {
+    margin-bottom: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
-/* Твои сообщения прижимаем вправо */
-.message.my-message {
-    align-items: flex-end;
+/* По умолчанию (и для чужих) ровняем всё влево */
+.ios-messages-container > div {
+    align-items: flex-start !important;
 }
 
-/* МЕТА-ДАННЫЕ: Имя и время (Изолировано, без рамок и фонов) */
-.message-user {
+/* Твои сообщения (если блок имеет text-align: right или flex-end в инлайнах) */
+.ios-messages-container > div[style*="text-align: right"],
+.ios-messages-container > div[style*="flex-end"],
+.ios-messages-container > div.my-message {
+    align-items: flex-end !important;
+}
+
+/* СБРОС ДЛЯ ПЕРВОГО ЭЛЕМЕНТА (Имя пользователя и время) */
+.ios-messages-container > div > *:first-child {
     display: block !important;
     width: auto !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
+    color: var(--ios-text-secondary) !important;
     font-size: 11px !important;
     font-weight: 600 !important;
-    color: var(--ios-text-secondary) !important;
+    padding: 0 6px !important;
     margin-bottom: 4px !important;
-    padding: 0 4px !important;
 }
 
-/* ОБЛАЧКА ТЕКСТА (Овалы строго для текста сообщений) */
-.message-text {
+/* СТИЛИЗАЦИЯ ВТОРОГО ЭЛЕМЕНТА (Само облачко текста сообщения) */
+.ios-messages-container > div > *:last-child {
     display: inline-block !important;
     width: fit-content !important;
     max-width: 75% !important;
@@ -296,33 +306,40 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     word-break: break-word !important;
     box-sizing: border-box !important;
     
-    /* Дефолтный стиль для чужих сообщений */
+    /* Цвета для ЧУЖИХ сообщений */
     background: var(--msg-other-bg) !important;
     color: var(--msg-other-text) !important;
     border: var(--msg-other-border) !important;
+    box-shadow: none !important;
 }
 
-/* Стилизация твоих облачков текста */
-.message.my-message .message-text {
+/* Цвета для ТВОИХ сообщений (когда родитель выровнен вправо) */
+.ios-messages-container > div[style*="text-align: right"] > *:last-child,
+.ios-messages-container > div[style*="flex-end"] > *:last-child,
+.ios-messages-container > div.my-message > *:last-child {
     background: var(--msg-my-bg) !important;
     color: var(--msg-my-text) !important;
     border: none !important;
     box-shadow: 0 4px 15px var(--ios-accent-glow) !important;
 }
 
-/* Системные сообщения по центру */
-.system-message {
-    align-self: center !important;
+/* Системные уведомления ("пользователь вошел в чат") */
+.ios-messages-container > div[style*="text-align: center"],
+.ios-messages-container > div.system-message {
+    align-items: center !important;
+}
+.ios-messages-container > div[style*="text-align: center"] > *,
+.ios-messages-container > div.system-message > * {
     background: transparent !important;
     border: none !important;
+    box-shadow: none !important;
     color: var(--ios-text-secondary) !important;
     font-style: italic !important;
     font-size: 13px !important;
-    margin: 8px 0 !important;
 }
 
 /* ======================================================= */
-/* 5. ПОЛЕ ВВОДА И АНИМАЦИИ                                */
+/* 5. ПОЛЕ ВВОДА                                              */
 /* ======================================================= */
 
 .ios-input-bar {
