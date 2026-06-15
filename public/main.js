@@ -1,6 +1,4 @@
-const socket = io({
-    transports: ['websocket', 'polling']
-});
+const socket = io();
 
 // Элементы авторизации
 const loginContainer = document.getElementById('login-container');
