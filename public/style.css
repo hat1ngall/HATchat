@@ -11,10 +11,10 @@
     --ios-accent-glow: rgba(255, 123, 0, 0.4);
     --ios-input-bg: rgba(0, 0, 0, 0.3);
     
-    /* Новые безопасные пресеты для облачков */
-    --msg-self-bg: #ff7b00;
-    --msg-self-text: #ffffff;
-    --msg-other-bg: rgba(35, 35, 40, 0.7);
+    /* Цвета для красивых овалов iMessage */
+    --msg-my-bg: #ff7b00;
+    --msg-my-text: #ffffff;
+    --msg-other-bg: rgba(38, 38, 45, 0.7);
     --msg-other-border: 1.5px solid #ff7b00;
     --msg-other-text: #ffffff;
 
@@ -31,8 +31,8 @@
     --ios-accent-glow: rgba(255, 107, 0, 0.2);
     --ios-input-bg: rgba(255, 255, 255, 0.8);
     
-    --msg-self-bg: #000000;
-    --msg-self-text: #ffffff;
+    --msg-my-bg: #000000; /* Твои сообщения в других темах — черные */
+    --msg-my-text: #ffffff;
     --msg-other-bg: rgba(0, 0, 0, 0.05);
     --msg-other-border: 1.5px solid #ff6b00;
     --msg-other-text: #000000;
@@ -50,8 +50,8 @@
     --ios-accent-glow: rgba(0, 0, 0, 0.1);
     --ios-input-bg: #ffffff;
     
-    --msg-self-bg: #000000;
-    --msg-self-text: #ffffff;
+    --msg-my-bg: #000000;
+    --msg-my-text: #ffffff;
     --msg-other-bg: #f2f2f7;
     --msg-other-border: 1.5px solid #000000;
     --msg-other-text: #000000;
@@ -186,7 +186,7 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 
 /* ======================================================= */
-/* СЕТКА И ОКНО ЧАТА                                       */
+/* ОКНО ЧАТА И СЕТКА                                       */
 /* ======================================================= */
 
 .ios-navbar {
@@ -243,104 +243,95 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     flex-direction: column;
 }
 
-/* Контейнер сообщений */
 .ios-messages-container {
     flex: 1;
     overflow-y: auto;
     padding-right: 10px;
     margin-bottom: 15px;
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; /* По дефолту выстраиваем влево */
+    flex-direction: column;
 }
 
 /* ======================================================= */
-/* АВТОМАТИЧЕСКАЯ КОРРЕКЦИЯ ОБЛАЧКОВ (УНИВЕРСАЛЬНАЯ)        */
+/* ТОЧЕЧНЫЕ И БЕЗОПАСНЫЕ ОБЛАЧКА iMESSAGE                  */
 /* ======================================================= */
 
-/* Применяется к любому контейнеру сообщения, независимо от JS-классов */
-.message, [class*="message"] {
-    margin-bottom: 16px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    max-width: 75% !important;
-    width: auto !important;
-    background: transparent !important; /* Намертво убиваем старый фон */
+/* Контейнер для каждого сообщения */
+.message {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Занимает всю ширину контейнера, чтобы работало выравнивание */
+}
+
+/* Твои сообщения (Выравниваем по правому краю) */
+.message.my-message {
+    align-items: flex-end;
+}
+
+/* Чужие сообщения (Выравниваем по левому краю) */
+.message.other-message {
+    align-items: flex-start;
+}
+
+/* Служебные сообщения (По центру) */
+.message.system-message {
+    align-items: center;
+}
+
+/* Мета-информация (Имя и время) */
+.message-user {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ios-text-secondary);
+    margin-bottom: 4px;
+    padding: 0 4px;
+}
+
+/* САМИ ОБЛАЧКА С ТЕКСТОМ (Решаем проблему кубиков раз и навсегда) */
+.message-text {
+    display: block;
+    width: fit-content;    /* Овал сжимается строго под размер текста */
+    max-width: 75%;        /* Но не растягивается шире 75% экрана чата */
+    padding: 10px 18px;
+    font-size: 15px;
+    line-height: 1.4;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+
+/* Стили текста для ТВОИХ сообщений (Оранжевые овалы без синевы) */
+.message.my-message .message-text {
+    background: var(--msg-my-bg) !important;
+    color: var(--msg-my-text) !important;
+    border-radius: 20px 20px 4px 20px;
+    box-shadow: 0 4px 15px var(--ios-accent-glow);
     border: none !important;
+}
+
+/* Стили текста для ЧУЖИХ сообщений (Темные/прозрачные с обводкой) */
+.message.other-message .message-text {
+    background: var(--msg-other-bg) !important;
+    color: var(--msg-other-text) !important;
+    border: var(--msg-other-border) !important;
+    border-radius: 20px 20px 20px 4px;
     box-shadow: none !important;
-    padding: 0 !important;
 }
 
-/* Облачко с текстом (Исправляем кубики и убираем режущий глаза цвет) */
-.message-text, [class*="text"] {
-    display: inline-block !important;
-    padding: 10px 18px !important;
-    font-size: 15px !important;
-    line-height: 1.4 !important;
-    border-radius: 20px !important; /* Превращаем в аккуратный овал */
-    word-break: break-word !important;
-    width: max-content !important; /* Обнимает текст, не сжимая до одной буквы */
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    
-    /* Дефолтный стиль (Для чужих сообщений) */
-    background: var(--msg-other-bg) !important;
-    border: var(--msg-other-border) !important;
-    color: var(--msg-other-text) !important;
-}
-
-/* СТИЛИЗАЦИЯ ДЛЯ СВОИХ СООБЩЕНИЙ (Поиск по классам или атрибутам) */
-.message.my-message, .my-message, [class*="my"] {
-    align-self: flex-end !important;
-    align-items: flex-end !important;
-}
-.message.my-message .message-text, .my-message [class*="text"], [class*="my"] [class*="text"] {
-    background: var(--msg-self-bg) !important;
-    color: var(--msg-self-text) !important;
-    border: none !important;
-    box-shadow: 0 4px 15px var(--ios-accent-glow) !important;
-    border-radius: 20px 20px 4px 20px !important;
-}
-
-/* СТИЛИЗАЦИЯ ДЛЯ ЧУЖИХ СООБЩЕНИЙ */
-.message.other-message, .other-message, [class*="other"] {
-    align-self: flex-start !important;
-    align-items: flex-start !important;
-}
-.message.other-message .message-text, .other-message [class*="text"], [class*="other"] [class*="text"] {
-    background: var(--msg-other-bg) !important;
-    border: var(--msg-other-border) !important;
-    color: var(--msg-other-text) !important;
-    border-radius: 20px 20px 20px 4px !important;
-}
-
-/* Служебные системные сообщения */
-[class*="system"] {
-    align-self: center !important;
-    align-items: center !important;
-}
-[class*="system"] [class*="text"] {
+/* Стили текста для системных сообщений */
+.message.system-message .message-text {
     background: transparent !important;
     border: none !important;
+    color: var(--ios-text-secondary) !important;
+    font-size: 13px;
+    font-style: italic;
     box-shadow: none !important;
-    color: var(--ios-text-secondary) !important;
-    font-size: 13px !important;
-    font-style: italic !important;
-}
-
-/* Юзернеймы над облачками */
-.message-user, [class*="user"], [class*="meta"] {
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    color: var(--ios-text-secondary) !important;
-    margin-bottom: 4px !important;
-    padding: 0 6px !important;
-    background: transparent !important;
-    border: none !important;
+    padding: 4px !important;
+    text-align: center;
 }
 
 /* ======================================================= */
-/* ПОЛЕ ВВОДА И АНИМАЦИИ                                   */
+/* ПОЛЕ ВВОДА И КНОПКА ОТПРАВКИ                            */
 /* ======================================================= */
 
 .ios-input-bar {
