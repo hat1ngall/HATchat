@@ -52,7 +52,7 @@
     --ios-input-bg: #ffffff;
     
     /* Стили облачков сообщений */
-    --my-msg-bg: #000000; /* Твои сообщения в других темах — черные */
+    --my-msg-bg: #000000;
     --my-msg-text: #ffffff;
     --other-msg-bg: #f2f2f7;
     --other-msg-border: 1.5px solid #000000;
@@ -128,10 +128,6 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.ios-pill-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.03);
-}
 
 /* Стеклянные премиум-карточки Apple */
 .ios-card {
@@ -153,10 +149,7 @@ body {
     display: none !important;
 }
 
-/* ======================================================= */
-/* ДИЗАЙН ЭКРАНА ВХОДА                                     */
-/* ======================================================= */
-
+/* Экран входа */
 #login-container {
     max-width: 390px;
     text-align: center;
@@ -201,10 +194,6 @@ input {
 input:first-child {
     border-bottom: 1px solid var(--ios-card-border);
 }
-input::placeholder {
-    color: var(--ios-text-secondary);
-    opacity: 0.7;
-}
 
 .ios-btn-primary {
     background: var(--ios-accent);
@@ -217,16 +206,10 @@ input::placeholder {
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 6px 25px var(--ios-accent-glow);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.ios-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px var(--ios-accent-glow);
-    opacity: 0.95;
 }
 
 /* ======================================================= */
-/* ЭКРАН СТИЛЬНОГО МЕССЕНДЖЕРА                             */
+/* ЭКРАН МЕССЕНДЖЕРА                                       */
 /* ======================================================= */
 
 .ios-navbar {
@@ -252,11 +235,6 @@ input::placeholder {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
-}
-#leave-btn:hover {
-    background: #ff453a;
-    color: white;
 }
 
 .chat-main {
@@ -301,58 +279,66 @@ input::placeholder {
     padding-right: 5px;
     margin-bottom: 15px;
     display: flex;
-    flex-direction: column; /* Выстраиваем сообщения сверху вниз */
+    flex-direction: column; 
 }
 
 /* ======================================================= */
-/* АВТОМАТИЧЕСКИЕ ОВАЛЬНЫЕ ОБЛАЧКА СООБЩЕНИЙ iMessage      */
+/* ИСПРАВЛЕННЫЕ ОБЛАЧКА СООБЩЕНИЙ                           */
 /* ======================================================= */
 
 .message {
     margin-bottom: 14px;
     display: flex;
     flex-direction: column;
-    max-width: 70%;
-    width: max-content; /* Чтобы овалы сжимались под размер текста, а не шли на всю ширину */
+    max-width: 75%;
+    width: 100%; /* Возвращаем полную ширину контейнеру, чтобы флексы внутри работали правильно */
     animation: iosMsgPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Если сообщение отправлено НАМИ (от себя) */
+/* Выравнивание контейнеров сообщений */
 .message.my-message {
-    align-self: flex-end; /* Сдвигаем направо */
+    align-self: flex-end; 
+    align-items: flex-end; /* Все элементы внутри смещаем вправо */
 }
-.message.my-message .message-user {
-    align-self: flex-end;
-    margin-right: 14px;
-    margin-left: 0;
+.message.other-message {
+    align-self: flex-start;
+    align-items: flex-start; /* Все элементы внутри смещаем влево */
 }
+.message.system-message {
+    align-self: center;
+    align-items: center;
+}
+
+/* Общие стили для текста-овала */
+.message-text {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 15px;
+    line-height: 1.4;
+    word-break: break-word;
+    width: max-content; /* Вот теперь овал будет сжиматься строго по тексту! */
+    max-width: 100%;    /* Но не выйдет за границы родителя */
+    box-sizing: border-box;
+}
+
+/* НАШИ сообщения (Свои) */
 .message.my-message .message-text {
     background: var(--my-msg-bg);
     color: var(--my-msg-text);
     border: none;
+    border-radius: 20px 20px 4px 20px; 
     box-shadow: 0 4px 15px var(--ios-accent-glow);
-    border-radius: 20px 20px 4px 20px; /* Красивый хвостик iMessage справа */
 }
 
-/* Если сообщение отправлено ДРУГИМ пользователем */
-.message.other-message {
-    align-self: flex-start; /* Сдвигаем налево */
-}
+/* ЧУЖИЕ сообщения (От других) */
 .message.other-message .message-text {
     background: var(--other-msg-bg);
     border: var(--other-msg-border);
     color: var(--other-msg-text);
-    border-radius: 20px 20px 25px 4px; /* Красивый хвостик iMessage слева */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px 20px 20px 4px; 
 }
 
-/* Служебные сообщения (кто-то вошел/вышел) */
-.message.system-message {
-    align-self: center;
-    max-width: 90%;
-    text-align: center;
-    opacity: 0.8;
-}
+/* Системные сообщения */
 .message.system-message .message-text {
     background: transparent !important;
     border: none !important;
@@ -360,22 +346,16 @@ input::placeholder {
     color: var(--ios-text-secondary);
     font-size: 13px;
     font-style: italic;
+    text-align: center;
 }
 
-/* Общие внутренние стили текста */
+/* Имена пользователей сверху облачка */
 .message-user {
     font-size: 11px;
     font-weight: 600;
     color: var(--ios-text-secondary);
-    margin-left: 14px;
-    margin-bottom: 3px;
-    letter-spacing: 0.3px;
-}
-.message-text {
-    padding: 10px 18px;
-    font-size: 15px;
-    line-height: 1.4;
-    word-break: break-word;
+    margin-bottom: 4px;
+    padding: 0 8px;
 }
 
 /* ======================================================= */
@@ -417,10 +397,6 @@ input::placeholder {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s;
-}
-#send-btn:hover {
-    transform: scale(1.05);
 }
 
 @keyframes orbMove {
