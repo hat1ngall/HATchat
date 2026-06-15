@@ -93,7 +93,8 @@ function updateRoomUsers(room) {
 
 const PORT = process.env.PORT || 3000;
 // Замени старый server.listen(PORT...) на этот код:
-PORT = process.env.PORT || 3000;
-server.listen(PORT, '0.0.0.0', () => {
-    console.log(`Сервер запущен на порту ${PORT}`);
+const FINAL_PORT = process.env.PORT || 3000;
+
+server.listen(FINAL_PORT, '0.0.0.0', () => {
+    console.log(`Сервер запущен на порту ${FINAL_PORT}`);
 });
