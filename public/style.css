@@ -252,66 +252,54 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 }
 
 /* ======================================================= */
-/* 4. СТАБИЛЬНЫЕ iMESSAGE ОБЛАЧКА БЕЗ КУБИКОВ               */
+/* 4. ИДЕАЛЬНЫЕ iMESSAGE ОБЛАЧКА (ЦЕЛЬНЫЕ)                 */
 /* ======================================================= */
 
-/* Применяем стили iMessage НАПРЯМУЮ к контейнерам сообщений */
-.ios-messages-container > div,
-.ios-messages-container > p {
+/* Контейнер сообщения теперь сам является "облачком" */
+.ios-messages-container > div {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 10px 16px !important;
     margin-bottom: 12px !important;
-    padding: 10px 18px !important;
-    border-radius: 20px !important; /* Настоящие круглые овалы */
-    font-size: 15px !important;
-    line-height: 1.4 !important;
+    border-radius: 20px !important; /* Твои скругления */
     max-width: 75% !important;
     width: fit-content !important;
-    word-break: break-word !important;
-    box-sizing: border-box !important;
-    display: block !important;
-    white-space: pre-line !important; /* Уважает переносы строк из JS */
-    
-    /* ДЕФОЛТ: Сообщения от других людей (Слева) */
+    word-wrap: break-word !important;
+    position: relative !important;
+}
+
+/* Настройка текста внутри */
+.ios-messages-container > div {
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    white-space: pre-wrap !important;
+}
+
+/* Стилизация для ЧУЖИХ сообщений (Слева) */
+.ios-messages-container > div:not(.my-message) {
+    align-self: flex-start !important;
     background: var(--msg-other-bg) !important;
     color: var(--msg-other-text) !important;
     border: var(--msg-other-border) !important;
-    align-self: flex-start !important;
-    box-shadow: none !important;
+    border-bottom-left-radius: 5px !important; /* Хвостик iMessage */
 }
 
-/* Перебиваем стили для ТВОИХ сообщений (Справа) */
-.ios-messages-container > div[style*="text-align: right"],
-.ios-messages-container > div[style*="flex-end"],
-.ios-messages-container > p[style*="text-align: right"],
-.ios-messages-container > p[style*="flex-end"],
-.ios-messages-container > .my-message {
+/* Стилизация для ТВОИХ сообщений (Справа) */
+.ios-messages-container > div.my-message {
     align-self: flex-end !important;
     background: var(--msg-my-bg) !important;
     color: var(--msg-my-text) !important;
     border: none !important;
     box-shadow: 0 4px 14px var(--ios-accent-glow) !important;
+    border-bottom-right-radius: 5px !important; /* Хвостик iMessage */
 }
 
-/* Фикс тем: Защита от перебивания стилей другими классами */
-.ios-dark-amber .ios-messages-container > div,
-.ios-light-amber .ios-messages-container > div,
-.ios-monochrome .ios-messages-container > div {
-    border-radius: 20px !important;
-}
-
-/* Системные оповещения (по центру) */
-.ios-messages-container > div[style*="text-align: center"],
-.ios-messages-container > p[style*="text-align: center"],
-.ios-messages-container > .system-message {
-    align-self: center !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: var(--ios-text-secondary) !important;
-    font-style: italic !important;
-    font-size: 13px !important;
-    padding: 4px 10px !important;
-    text-align: center !important;
-    max-width: 100% !important;
+/* Мелкий текст (имя/время) внутри общего облачка */
+.ios-messages-container > div span {
+    font-size: 10px !important;
+    opacity: 0.7 !important;
+    display: block !important;
+    margin-bottom: 2px !important;
 }
 
 /* ======================================================= */
