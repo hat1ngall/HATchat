@@ -240,15 +240,16 @@ input:first-child { border-bottom: 1px solid var(--ios-card-border); }
     flex: 3;
     display: flex;
     flex-direction: column;
+    height: 100%; /* Убеждаемся, что область чата занимает всю высоту родителя */
+    overflow: hidden; /* Важно: отсекаем всё, что вылезает за пределы */
 }
 
 .ios-messages-container {
-    flex: 1;
-    overflow-y: auto !important; /* Включаем скролл внутри */
-    height: 100% !important;     /* Занимает всю доступную высоту */
-    max-height: 400px;           /* Ограничиваем высоту, чтобы не выезжало */
-    padding-right: 10px;
+    flex: 1; /* Занимает всё оставшееся место, но не более того */
+    overflow-y: auto !important; /* Включаем внутренний скролл */
+    min-height: 0; /* Важный хак для Flexbox, чтобы скролл заработал */
     margin-bottom: 15px;
+    padding-right: 10px;
     display: flex;
     flex-direction: column;
 }
