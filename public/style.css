@@ -1,5 +1,5 @@
 /* ======================================================= */
-/* ЦВТОВЫЕ МАТРИЦЫ И ПРЕСЕТЫ ИНТЕРФЕЙСА iOS 26             */
+/* ЦВЕТОВЫЕ МАТРИЦЫ И ПРЕСЕТЫ ИНТЕРФЕЙСА iOS 26             */
 /* ======================================================= */
 
 .ios-dark-amber {
@@ -7,16 +7,16 @@
     --ios-card-border: rgba(255, 255, 255, 0.08);
     --ios-text: #ffffff;
     --ios-text-secondary: rgba(255, 255, 255, 0.5);
-    --ios-accent: #ff7b00; /* Глубокий благородный оранжевый Apple */
+    --ios-accent: #ff7b00; /* Янтарно-оранжевый Apple */
     --ios-accent-glow: rgba(255, 123, 0, 0.4);
     --ios-input-bg: rgba(0, 0, 0, 0.3);
     
-    /* Стили облачков сообщений */
-    --my-msg-bg: #ff7b00;
-    --my-msg-text: #ffffff;
-    --other-msg-bg: rgba(30, 30, 35, 0.6);
-    --other-msg-border: 1.5px solid #ff7b00;
-    --other-msg-text: #ffffff;
+    /* Новые безопасные пресеты для облачков */
+    --msg-self-bg: #ff7b00;
+    --msg-self-text: #ffffff;
+    --msg-other-bg: rgba(35, 35, 40, 0.7);
+    --msg-other-border: 1.5px solid #ff7b00;
+    --msg-other-text: #ffffff;
 
     --orb-color-1: #ff5100;
     --orb-color-2: #111115;
@@ -31,12 +31,11 @@
     --ios-accent-glow: rgba(255, 107, 0, 0.2);
     --ios-input-bg: rgba(255, 255, 255, 0.8);
     
-    /* Стили облачков сообщений */
-    --my-msg-bg: #000000; /* Твои сообщения в других темах — черные */
-    --my-msg-text: #ffffff;
-    --other-msg-bg: rgba(0, 0, 0, 0.05);
-    --other-msg-border: 1.5px solid #ff6b00;
-    --other-msg-text: #000000;
+    --msg-self-bg: #000000;
+    --msg-self-text: #ffffff;
+    --msg-other-bg: rgba(0, 0, 0, 0.05);
+    --msg-other-border: 1.5px solid #ff6b00;
+    --msg-other-text: #000000;
 
     --orb-color-1: #ffe3cc;
     --orb-color-2: #f4f4f6;
@@ -51,19 +50,18 @@
     --ios-accent-glow: rgba(0, 0, 0, 0.1);
     --ios-input-bg: #ffffff;
     
-    /* Стили облачков сообщений */
-    --my-msg-bg: #000000;
-    --my-msg-text: #ffffff;
-    --other-msg-bg: #f2f2f7;
-    --other-msg-border: 1.5px solid #000000;
-    --other-msg-text: #000000;
+    --msg-self-bg: #000000;
+    --msg-self-text: #ffffff;
+    --msg-other-bg: #f2f2f7;
+    --msg-other-border: 1.5px solid #000000;
+    --msg-other-text: #000000;
 
     --orb-color-1: #ffffff;
     --orb-color-2: #e5e5ea;
 }
 
 /* ======================================================= */
-/* СИСТЕМНЫЕ СБОРКИ И СТЕКЛО (GLASSMORPHISM)               */
+/* БАЗОВЫЕ СИСТЕМНЫЕ СТИЛИ                                 */
 /* ======================================================= */
 
 * {
@@ -86,7 +84,6 @@ body {
     position: relative;
 }
 
-/* Градиентные живые сферы за стеклом */
 .ios-blur-bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -107,7 +104,6 @@ body {
 .orb-2 { width: 600px; height: 600px; background: var(--orb-color-1); bottom: -20%; right: -10%; animation-delay: -5s; }
 .orb-3 { width: 400px; height: 400px; background: #3a3a3c; top: 40%; left: 50%; animation-delay: -10s; }
 
-/* Системный пульт управления темами */
 .ios-control-center {
     position: fixed;
     top: 25px;
@@ -129,7 +125,6 @@ body {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Стеклянные премиум-карточки Apple */
 .ios-card {
     position: relative;
     z-index: 10;
@@ -142,14 +137,10 @@ body {
     width: 100%;
     max-width: 850px;
     padding: 35px;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
-/* Экран входа */
 #login-container {
     max-width: 390px;
     text-align: center;
@@ -159,20 +150,9 @@ body {
     font-size: 55px;
     margin-bottom: 12px;
     filter: drop-shadow(0 4px 12px var(--ios-accent-glow));
-    animation: iconFloat 4s infinite ease-in-out;
 }
-.login-logo {
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    margin-bottom: 4px;
-}
-.ios-subtitle {
-    color: var(--ios-text-secondary);
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 30px;
-}
+.login-logo { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+.ios-subtitle { color: var(--ios-text-secondary); font-size: 13px; margin-bottom: 30px; }
 
 .ios-input-group {
     background: var(--ios-input-bg);
@@ -188,12 +168,9 @@ input {
     width: 100%;
     padding: 16px 20px;
     font-size: 16px;
-    font-weight: 500;
     outline: none;
 }
-input:first-child {
-    border-bottom: 1px solid var(--ios-card-border);
-}
+input:first-child { border-bottom: 1px solid var(--ios-card-border); }
 
 .ios-btn-primary {
     background: var(--ios-accent);
@@ -209,7 +186,7 @@ input:first-child {
 }
 
 /* ======================================================= */
-/* ЭКРАН МЕССЕНДЖЕРА                                       */
+/* СЕТКА И ОКНО ЧАТА                                       */
 /* ======================================================= */
 
 .ios-navbar {
@@ -220,19 +197,12 @@ input:first-child {
     padding-bottom: 18px;
     margin-bottom: 20px;
 }
-.ios-live-indicator {
-    color: var(--ios-accent);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
 #leave-btn {
     background: rgba(255, 59, 48, 0.15);
     color: #ff453a;
     border: none;
     padding: 8px 16px;
     border-radius: 14px;
-    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -254,7 +224,6 @@ input:first-child {
     font-weight: 700;
     color: var(--ios-text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     margin-bottom: 15px;
 }
 #users-list li {
@@ -273,103 +242,106 @@ input:first-child {
     display: flex;
     flex-direction: column;
 }
+
+/* Контейнер сообщений */
 .ios-messages-container {
     flex: 1;
     overflow-y: auto;
-    padding-right: 5px;
+    padding-right: 10px;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column; 
+    align-items: flex-start; /* По дефолту выстраиваем влево */
 }
 
 /* ======================================================= */
-/* ИСПРАВЛЕННЫЕ ОБЛАЧКА СООБЩЕНИЙ                           */
+/* АВТОМАТИЧЕСКАЯ КОРРЕКЦИЯ ОБЛАЧКОВ (УНИВЕРСАЛЬНАЯ)        */
 /* ======================================================= */
 
-.message {
-    margin-bottom: 14px;
-    display: flex;
-    flex-direction: column;
-    max-width: 75%;
-    width: 100%; /* Возвращаем полную ширину контейнеру, чтобы флексы внутри работали правильно */
-    animation: iosMsgPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* Применяется к любому контейнеру сообщения, независимо от JS-классов */
+.message, [class*="message"] {
+    margin-bottom: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    max-width: 75% !important;
+    width: auto !important;
+    background: transparent !important; /* Намертво убиваем старый фон */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
-/* Выравнивание контейнеров сообщений */
-.message.my-message {
-    align-self: flex-end; 
-    align-items: flex-end; /* Все элементы внутри смещаем вправо */
-}
-.message.other-message {
-    align-self: flex-start;
-    align-items: flex-start; /* Все элементы внутри смещаем влево */
-}
-.message.system-message {
-    align-self: center;
-    align-items: center;
-}
-
-/* Общие стили для текста-овала */
-.message-text {
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 15px;
-    line-height: 1.4;
-    word-break: break-word;
-    width: max-content; /* Вот теперь овал будет сжиматься строго по тексту! */
-    max-width: 100%;    /* Но не выйдет за границы родителя */
-    box-sizing: border-box;
+/* Облачко с текстом (Исправляем кубики и убираем режущий глаза цвет) */
+.message-text, [class*="text"] {
+    display: inline-block !important;
+    padding: 10px 18px !important;
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    border-radius: 20px !important; /* Превращаем в аккуратный овал */
+    word-break: break-word !important;
+    width: max-content !important; /* Обнимает текст, не сжимая до одной буквы */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    
+    /* Дефолтный стиль (Для чужих сообщений) */
+    background: var(--msg-other-bg) !important;
+    border: var(--msg-other-border) !important;
+    color: var(--msg-other-text) !important;
 }
 
-/* НАШИ сообщения (Свои) */
-.message.my-message .message-text {
-    background: var(--my-msg-bg);
-    color: var(--my-msg-text);
-    border: none;
-    border-radius: 20px 20px 4px 20px; 
-    box-shadow: 0 4px 15px var(--ios-accent-glow);
+/* СТИЛИЗАЦИЯ ДЛЯ СВОИХ СООБЩЕНИЙ (Поиск по классам или атрибутам) */
+.message.my-message, .my-message, [class*="my"] {
+    align-self: flex-end !important;
+    align-items: flex-end !important;
+}
+.message.my-message .message-text, .my-message [class*="text"], [class*="my"] [class*="text"] {
+    background: var(--msg-self-bg) !important;
+    color: var(--msg-self-text) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px var(--ios-accent-glow) !important;
+    border-radius: 20px 20px 4px 20px !important;
 }
 
-/* ЧУЖИЕ сообщения (От других) */
-.message.other-message .message-text {
-    background: var(--other-msg-bg);
-    border: var(--other-msg-border);
-    color: var(--other-msg-text);
-    border-radius: 20px 20px 20px 4px; 
+/* СТИЛИЗАЦИЯ ДЛЯ ЧУЖИХ СООБЩЕНИЙ */
+.message.other-message, .other-message, [class*="other"] {
+    align-self: flex-start !important;
+    align-items: flex-start !important;
+}
+.message.other-message .message-text, .other-message [class*="text"], [class*="other"] [class*="text"] {
+    background: var(--msg-other-bg) !important;
+    border: var(--msg-other-border) !important;
+    color: var(--msg-other-text) !important;
+    border-radius: 20px 20px 20px 4px !important;
 }
 
-/* Системные сообщения */
-.message.system-message .message-text {
+/* Служебные системные сообщения */
+[class*="system"] {
+    align-self: center !important;
+    align-items: center !important;
+}
+[class*="system"] [class*="text"] {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    color: var(--ios-text-secondary);
-    font-size: 13px;
-    font-style: italic;
-    text-align: center;
+    color: var(--ios-text-secondary) !important;
+    font-size: 13px !important;
+    font-style: italic !important;
 }
 
-/* Имена пользователей сверху облачка */
-.message-user {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--ios-text-secondary);
-    margin-bottom: 4px;
-    padding: 0 8px;
+/* Юзернеймы над облачками */
+.message-user, [class*="user"], [class*="meta"] {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: var(--ios-text-secondary) !important;
+    margin-bottom: 4px !important;
+    padding: 0 6px !important;
+    background: transparent !important;
+    border: none !important;
 }
 
 /* ======================================================= */
-/* ИНПУТБАР И АНИМАЦИИ                                     */
+/* ПОЛЕ ВВОДА И АНИМАЦИИ                                   */
 /* ======================================================= */
-
-.ios-typing {
-    height: 18px;
-    font-size: 13px;
-    color: var(--ios-text-secondary);
-    font-style: italic;
-    margin-bottom: 10px;
-    padding-left: 10px;
-}
 
 .ios-input-bar {
     display: flex;
@@ -379,24 +351,18 @@ input:first-child {
     border: 1px solid var(--ios-card-border);
     align-items: center;
 }
-.ios-input-bar input {
-    padding: 10px 15px;
-    margin-bottom: 0;
-}
+.ios-input-bar input { padding: 10px 15px; margin-bottom: 0; }
+
 #send-btn {
     background: var(--ios-accent);
     color: white;
     border: none;
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
+    width: 38px; height: 38px; min-width: 38px;
     border-radius: 50%;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
 }
 
 @keyframes orbMove {
@@ -404,43 +370,13 @@ input:first-child {
     50% { transform: translate(10%, 15%) scale(1.1); }
     100% { transform: translate(-5%, -10%) scale(0.9); }
 }
-@keyframes iconFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-@keyframes iosMsgPop {
-    from { opacity: 0; transform: scale(0.95) translateY(8px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
 
-/* Адаптивность */
 @media (max-width: 680px) {
     body { padding: 8px; }
     .ios-card { padding: 20px; border-radius: 28px; }
     .chat-main { flex-direction: column; height: 68vh; gap: 12px; }
-    
-    .ios-sidebar {
-        max-width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--ios-card-border);
-        padding-right: 0;
-        padding-bottom: 10px;
-        max-height: 65px;
-    }
-    #users-list {
-        display: flex;
-        gap: 6px;
-        overflow-x: auto;
-    }
-    #users-list li {
-        margin-bottom: 0;
-        white-space: nowrap;
-        padding: 8px 14px;
-        border-radius: 12px;
-    }
-    .ios-control-center {
-        top: auto;
-        bottom: 15px;
-        right: 15px;
-    }
+    .ios-sidebar { max-width: 100%; border-right: none; border-bottom: 1px solid var(--ios-card-border); padding-bottom: 10px; max-height: 65px; }
+    #users-list { display: flex; gap: 6px; overflow-x: auto; }
+    #users-list li { margin-bottom: 0; white-space: nowrap; padding: 8px 14px; }
+    .ios-control-center { top: auto; bottom: 15px; right: 15px; }
 }
