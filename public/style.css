@@ -1,3 +1,4 @@
+/* Общие настройки для красивых шрифтов и фона */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,149 +7,207 @@
 }
 
 body {
-    background-color: #f0f2f5;
+    background: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 10px;
 }
 
+/* Карточки экранов */
 .card {
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 800px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* Экран логина */
 #login-container {
     max-width: 400px;
     text-align: center;
+    gap: 15px;
 }
 
-#login-container input, #login-container button {
+#login-container h2 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input, button {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
 }
 
-#login-container button, #message-form button, #leave-btn {
-    background-color: #0084ff;
+input:focus {
+    border-color: #007bff;
+}
+
+button {
+    background: #007bff;
     color: white;
     border: none;
-    cursor: pointer;
     font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-#login-container button:hover, #message-form button:hover {
-    background-color: #0066cc;
+button:hover {
+    background: #0056b3;
 }
 
-.hidden { display: none !important; }
-
-/* Сетка чата */
+/* Экран чата */
 .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid #f0f2f5;
     padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
 }
 
 #leave-btn {
-    background-color: #e4e6eb;
-    color: #050505;
-    padding: 6px 12px;
-    border-radius: 4px;
+    width: auto;
+    padding: 8px 16px;
+    background: #dc3545;
 }
 
+#leave-btn:hover {
+    background: #bd2130;
+}
+
+/* Главная рабочая зона (Флексбокс) */
 .chat-main {
     display: flex;
-    height: 500px;
-    margin-top: 15px;
+    gap: 20px;
+    height: 60vh;
+    min-height: 350px;
 }
 
+/* Боковая панель списка онлайн */
 .sidebar {
-    width: 25%;
-    border-right: 1px solid #eee;
+    flex: 1;
+    max-width: 200px;
+    border-right: 2px solid #f0f2f5;
     padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h4 {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+#users-list {
+    list-style: none;
     overflow-y: auto;
 }
 
-.sidebar ul { list-style: none; margin-top: 10px; }
-.sidebar li {
-    padding: 6px 10px;
-    background: #e7f3ff;
-    color: #0064d2;
-    border-radius: 4px;
-    margin-bottom: 5px;
+#users-list li {
+    padding: 8px 12px;
+    background: #e9ecef;
+    border-radius: 6px;
+    margin-bottom: 8px;
     font-size: 14px;
+    word-break: break-all;
 }
 
+/* Главная зона переписки */
 .chat-area {
-    width: 75%;
+    flex: 3;
     display: flex;
     flex-direction: column;
-    padding-left: 15px;
 }
 
 #messages-box {
-    flex-grow: 1;
+    flex: 1;
     overflow-y: auto;
-    padding-right: 5px;
-    margin-bottom: 10px;
-}
-
-.msg {
-    margin-bottom: 10px;
-    padding: 8px 12px;
+    border: 1px solid #e9ecef;
     border-radius: 8px;
-    width: fit-content;
-    max-width: 80%;
-}
-
-.msg.system {
-    background: #f0f0f0;
-    color: #555;
-    font-size: 12px;
-    margin: 10px auto;
-    text-align: center;
-}
-
-.msg.user-msg {
-    background: #e4e6eb;
-    color: black;
-}
-
-.msg.meta {
-    font-size: 11px;
-    color: #65676b;
-    margin-bottom: 2px;
+    padding: 15px;
+    background: #f8f9fa;
+    margin-bottom: 10px;
 }
 
 #typing-indicator {
-    height: 20px;
-    font-size: 12px;
-    color: #65676b;
+    font-size: 13px;
+    color: #888;
     font-style: italic;
-    padding-left: 5px;
+    height: 20px;
+    margin-bottom: 5px;
 }
 
 #message-form {
     display: flex;
-}
-
-#message-input {
-    flex-grow: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px 0 0 4px;
+    gap: 10px;
 }
 
 #message-form button {
-    padding: 0 20px;
-    border-radius: 0 4px 4px 0;
+    width: auto;
+    white-space: nowrap;
+}
+
+/* ======================================================= */
+/* АДАПТИВ ОД ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ (МЕДИА-ЗАПРОСЫ)       */
+/* ======================================================= */
+@media (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    /* Перестраиваем боковую панель и сообщения в один столбец */
+    .chat-main {
+        flex-direction: column;
+        height: 75vh; /* Даем больше места чату на телефонах */
+        gap: 10px;
+    }
+
+    .sidebar {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #f0f2f5;
+        padding-right: 0;
+        padding-bottom: 10px;
+        max-height: 80px; /* Чтобы список онлайн не занимал весь экран телефона */
+    }
+
+    #users-list {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto; /* На телефоне юзеры скроллятся влево-вправо */
+        overflow-y: hidden;
+    }
+
+    #users-list li {
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+
+    .chat-area {
+        flex: 1;
+    }
+
+    input, button {
+        padding: 10px;
+        font-size: 15px;
+    }
 }
